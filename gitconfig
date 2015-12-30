@@ -1,0 +1,25 @@
+[diff]
+    external = ~/tools/git_diff_wrapper
+[pager]
+    diff =
+[color]
+    ui = true
+[user]
+    email = jim.caillard@viseo.com
+    mail = jim.caillard@viseo.com
+    ;email = caillardjim@gmail.com
+    ;mail = caillardjim@gmail.com
+    name = Jim
+
+[credential]
+    helper = cache --timeout=360000
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    tree = log --pretty=oneline --abbrev-commit --graph --decorate
+    graph = log --pretty=oneline --abbrev-commit --graph --decorate
+    lfiles = log --stat
+    loneline = log --pretty=online
