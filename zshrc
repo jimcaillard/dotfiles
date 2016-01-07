@@ -45,7 +45,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export MAKEFLAGS='--no-print-directory'
 
 # because why the fuck not here
-setxkbmap us -variant altgr-intl
+setxkbmap us -variant altgr-intl caps:escape
 
 # }}}
 # {{{ completion
@@ -599,11 +599,13 @@ export ANDROID_HOME='/home/jim/sft/android-sdk-linux'
 export PATH=${PATH}:/home/jim/sft/android-sdk-linux/tools
 export PATH=${PATH}:/home/jim/sft/android-sdk-linux/platform-tools
 alias start_pikit='mvn spring-boot:run -Plocal -Dspring.profiles.active=local,nosslchecking -Dspring.config.location=/home/jim/Carrefour-Pikit/pikit-docs/properties/pikit-hub-rest/'
-alias stx='setxkbmap us -variant altgr-intl'
+alias stx='setxkbmap us -variant altgr-intl -option caps:escape'
 alias idea='./sft/idea-IC-143.382.35/bin/idea.sh &'
 eval $(thefuck --alias)
 alias partyhard='curl -k https://mariaux.org/party-hard.pl | perl &'
-alias adb_restart='sudo /home/jim/sft/android-sdk-linux/platform-tools/adb kill-server && /home/jim/sft/android-sdk-linux/platform-tools/adb start-server'
+alias adb_restart='sudo /home/jim/sft/android-sdk-linux/platform-tools/adb kill-server && sudo /home/jim/sft/android-sdk-linux/platform-tools/adb start-server'
 
 alias rn_logs='adb logcat *:S ReactNative:V ReactNativeJS:V'
 alias rn_start_fix='echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'
+alias fix_watch='echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'
+alias snow='xsnow -notrees -nowind -nosanta'

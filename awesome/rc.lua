@@ -22,6 +22,39 @@ function getBatteryStatus()
    return status
 end
 
+require("vicious")
+
+
+-- CPU widget from http://awesome.naquadah.org/wiki/CPU_Usage
+-- adapted to awesome 3.5 by pdizzle
+
+-- {{ define wibox
+cpuwidget = wibox.widget.textbox()
+cpuwidget:set_align("right")
+-- }}
+
+-- {{ function
+jiffies = {}
+
+function activecpu()
+    cpusage = ""
+    for line in io.lines("/proc/stat") do
+        local cpu, newjiffies = string.match(line, "(cpu%d*)%s+(%d+)")
+        if cpu and newjiffies then
+            if not jiffies[cpu] then
+                jiffies[cpu] = newjiffies
+            end
+            --The string.format prevents your task list from jumping around
+            --when CPU usage goes above/below 10%
+            cpusage = cpusage .. "." .. string.format("%02d", newjiffies-jiffies[cpu])
+            jiffies[cpu] = newjiffies
+        end
+    end
+    cpuwidget:set_markup(cpusage)
+end
+
+-- }}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -206,6 +239,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(cpuwidget)
     right_layout:add(battery)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
@@ -490,3 +524,7 @@ batteryTimer:connect_signal("timeout", function()
 end)
 batteryTimer:start()
 battery:set_markup(getBatteryStatus())
+
+cpu_timer = timer({timeout = 1})
+cpu_timer:connect_signal("timeout", function() activecpu() end)
+cpu_timer:start()
