@@ -598,6 +598,9 @@ map <leader>mw :!clear && make run_wifi<cr>
 map <leader>mf :!clear<cr>:!%:p<cr>
 
 " Node current file
+map <leader>mf :!clear<cr>:!node %:p<cr>
+
+" Node current file
 map <leader>mn :!clear<cr>:!node %:p<cr>
 
 map <leader>ma :!clear<cr>:!gnatmake %:p && ./main<cr>

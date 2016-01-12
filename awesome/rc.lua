@@ -22,9 +22,6 @@ function getBatteryStatus()
    return status
 end
 
-require("vicious")
-
-
 -- CPU widget from http://awesome.naquadah.org/wiki/CPU_Usage
 -- adapted to awesome 3.5 by pdizzle
 
@@ -528,3 +525,8 @@ battery:set_markup(getBatteryStatus())
 cpu_timer = timer({timeout = 1})
 cpu_timer:connect_signal("timeout", function() activecpu() end)
 cpu_timer:start()
+
+awful.util.spawn_with_shell("np-applet")
+awful.util.spawn_with_shell("skype")
+awful.util.spawn_with_shell("steam")
+awful.util.spawn_with_shell("redshift")
